@@ -1,11 +1,26 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
+    <link rel="stylesheet" href="../public/css/reset.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+
 <body>
-    
+    <h1>Bienvenido al Dashboard</h1>
+    <button id="logoutBtn">Cerrar sesión</button>
+
+    <h2>Usuarios</h2>
+    <div id="usersContainer"></div>
+
+    <script src="../utils/config.js"></script>
+    <script src="../public/services/logoutService.js"></script>
+    <script src="../public/services/usersService.js"></script>
+    <script src="../utils/session.js"></script>
+    <script src="../public/js/dashboard.js"></script>
 </body>
+
 </html>

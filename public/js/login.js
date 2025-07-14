@@ -15,6 +15,11 @@ $(document).ready(function () {
 
       // En caso de éxito, da un mensaje de bienvenida y redirige al dashboard
       function (data) {
+        
+        // Guarda los datos de sesión en localStorage
+        localStorage.setItem("username", data.username);
+        localStorage.setItem("rol", data.rol);
+
         alert(`Bienvenido, ${data.username}`);
         window.location.href = "dashboard.html";
       },

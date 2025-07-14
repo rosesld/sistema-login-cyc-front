@@ -8,3 +8,11 @@ function checksession(redirect = true) {
 
   return sessionId;
 }
+
+function getUserName() {
+  return localStorage.getItem("username") || "Usuario";
+}
+
+function getUserRole() {
+  return localStorage.getItem("rol") || "Invitado";
+}

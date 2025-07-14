@@ -1,43 +1,55 @@
 $(document).ready(function () {
 
-// Verificar si existe una sesión activa
-const sessionId = checksession();
-if (!sessionId) return;
+  const username = getUserName();
+  const userRole = getUserRole();
+  
+  $("#welcomeMessage").text(`Bienvenido, ${username}`);
+  $("#userRole").text(`${userRole}`);
 
-// Función para obtener y mostrar usuarios
-getUsers(
-  function (users) {
+  // Verificar si existe una sesión activa
+  const sessionId = checksession();
+  if (!sessionId) return;
 
-    const container = $("#usersContainer");
-    container.empty();
+  // Función para obtener y mostrar usuarios
+  getUsers(
+    function (users) {
+      const tbody = $("#usersTable tbody");
+      tbody.empty();
 
-    if (users.length === 0) {
-      container.append("<p>No hay usuarios registrados.</p>");
-    } else {
-      // Itera sobre los usuarios y los muestra en el contenedor
-      users.forEach( user => {
-        container.append(`
-          <div class="user">
-              <p><strong>Username:</strong> ${user.username}</p>
-              <p><strong>Rol:</strong> ${user.rol}</p>
-              <p><strong>Renta mensual:</strong> ${user.renta_mensual}</p>
-              <hr/>
-          </div>
-          `);
+      users.forEach((user) => {
+        const row = `
+        <tr>
+          <td>${user.nombre}</td>
+          <td>${user.username}</td>
+          <td>${user.rol}</td>
+          <td>${user.renta_mensual}</td>
+        </tr>`;
+        tbody.append(row);
       });
-    }
-  },
-  // En caso de error muestra un mensaje
-  function (error) {
-    $("#usersContainer").html(`<p class="error">${error}</p>`);
-  }
-);
 
-/** Función para cerrar sesión */
+      // Inicializa DataTable (solo una vez)
+      if (!$.fn.DataTable.isDataTable("#usersTable")) {
+        $("#usersTable").DataTable();
+      }
+    },
+    // En caso de error muestra un mensaje
+    function (error) {
+      $("#usersContainer").html(`<p class="error">${error}</p>`);
+    }
+  );
+
+  /** Función para cerrar sesión */
   $("#logoutBtn").click(function () {
     logoutUser(
       // si el cierre de sesión es exitoso, redirige al login
       function () {
+
+        // Limpia los datos de sesión
+        localStorage.removeItem("sessionId");
+        localStorage.removeItem("username");
+        localStorage.removeItem("rol");
+        $("#welcomeMessage").text("");
+
         alert("Sesión cerrada correctamente");
         window.location.href = "login.html";
       },

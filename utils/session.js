@@ -1,8 +1,14 @@
 function checksession(redirect = true) {
   const sessionId = localStorage.getItem("sessionId");
   if (!sessionId) {
-    alert("No hay sesión activa. Inicia sesión nuevamente.");
-    window.location.href = "login.html";
+    Swal.fire({
+      icon: "warning",
+      title: "Sesión no activa",
+      text: "No hay sesión activa. Por favor inicia sesión nuevamente.",
+      confirmButtonText: "Ir al login",
+    }).then(() => {
+      window.location.href = "login.html";
+    });
     return null;
   }
 

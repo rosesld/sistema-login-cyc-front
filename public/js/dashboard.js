@@ -1,8 +1,7 @@
 $(document).ready(function () {
-
   const username = getUserName();
   const userRole = getUserRole();
-  
+
   $("#welcomeMessage").text(`Bienvenido, ${username}`);
   $("#userRole").text(`${userRole}`);
 
@@ -40,23 +39,41 @@ $(document).ready(function () {
 
   /** Función para cerrar sesión */
   $("#logoutBtn").click(function () {
-    logoutUser(
-      // si el cierre de sesión es exitoso, redirige al login
-      function () {
+    Swal.fire({
+      title: "¿Cerrar sesión?",
+      text: "Tu sesión actual se cerrará.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, cerrar sesión",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        logoutUser(
+          // si el cierre de sesión es exitoso, redirige al login
+          function () {
+            // Limpia los datos de sesión
+            localStorage.removeItem("sessionId");
+            localStorage.removeItem("username");
+            localStorage.removeItem("rol");
+            $("#welcomeMessage").text("");
 
-        // Limpia los datos de sesión
-        localStorage.removeItem("sessionId");
-        localStorage.removeItem("username");
-        localStorage.removeItem("rol");
-        $("#welcomeMessage").text("");
-
-        alert("Sesión cerrada correctamente");
-        window.location.href = "login.html";
-      },
-      // si hay un error, muestra un mensaje
-      function (error) {
-        $("#error").text(error).show();
+            Swal.fire({
+              icon: "success",
+              title: "Sesión cerrada",
+              text: "Has cerrado sesión correctamente.",
+              confirmButtonText: "Aceptar",
+            }).then(() => {
+              window.location.href = "login.html";
+            });
+          },
+          // si hay un error, muestra un mensaje
+          function (error) {
+            $("#error").text(error).show();
+          }
+        );
       }
-    );
+    });
   });
 });

@@ -7,7 +7,7 @@ function checksession(redirect = true) {
       text: "No hay sesión activa. Por favor inicia sesión nuevamente.",
       confirmButtonText: "Ir al login",
     }).then(() => {
-      window.location.href = "login.html";
+      window.location.href = "/index.html";
     });
     return null;
   }

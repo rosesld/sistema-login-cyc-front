@@ -7,7 +7,18 @@ $(document).ready(function () {
 
   // Verificar si existe una sesión activa
   const sessionId = checksession();
-  if (!sessionId) return;
+   if (!sessionId) {
+    // Si no hay sesión, ocultar logout y redirigir a login
+    $("#logoutBtn").hide();
+   
+    return;
+
+     } else {
+    // Mostrar logout y mensajes
+    $("#logoutBtn").show();
+    $("#welcomeMessage").text(`Bienvenido, ${username}`);
+    $("#userRole").text(userRole);
+  }
 
   // Función para obtener y mostrar usuarios
   getUsers(
@@ -65,7 +76,7 @@ $(document).ready(function () {
               text: "Has cerrado sesión correctamente.",
               confirmButtonText: "Aceptar",
             }).then(() => {
-              window.location.href = "login.html";
+              window.location.href = "/index.html";
             });
           },
           // si hay un error, muestra un mensaje

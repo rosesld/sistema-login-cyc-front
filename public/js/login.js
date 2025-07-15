@@ -3,8 +3,8 @@ $(document).ready(function () {
     e.preventDefault();
 
     // Obtener valores del formulario y limpia espacios
-    const username = $("#username").val().trim();
-    const password = $("#password").val().trim();
+    const username = $("#username").val().trim().toLowerCase();
+    const password = $("#password").val().trim().toLowerCase();
 
     $("#error").hide().text("");
 
@@ -24,7 +24,7 @@ $(document).ready(function () {
           icon: "success",
           confirmButtonText: "Continuar",
         }).then(() => {
-          window.location.href = "dashboard.html";
+          window.location.href = "views/dashboard.html";
         });
       },
 

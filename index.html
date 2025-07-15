@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <title>Clerc & Carvajal | Login</title>
+    <link rel="stylesheet" href="../public/css/reset.css">
+    <link rel="stylesheet" href="../public/css/login.css">
+    <link rel="stylesheet" href="../public/css/navbar.css">
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <span class="navbar-logo">Sistema login C&C</span>
+        <button id="logoutBtn">Cerrar Sesión</button>
+    </nav>
+    <div class="container">
+        <h2>Iniciar Sesión</h2>
+        <div class="error" id="error"></div>
+        <form id="loginForm">
+            <label for="username">Nombre de Usuario</label>
+            <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario" required>
+
+            <label for="password">Contraseña</label>
+            <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required>
+
+            <button class="btn-login" type="submit">Iniciar Sesión</button>
+        </form>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="../utils/config.js"></script>
+    <script src="../public/services/loginService.js"></script>
+    <script src="../public/js/login.js"></script>
+</body>
+
+</html>
